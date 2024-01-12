@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STL Laguna Bet Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-image: url(pcso.svg);
+            background-size: cover;
+            background-position-x: center;
+        }
+
+        #form {
+            max-width: 500px;
+            margin-top: 50px;
+            margin-left: 500px;
+            background-color: silver;
+            border: 200px;
+            border-color: black;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, select {
+            width: 350px;
+            padding: 8px;
+            margin-top: 5px;
+            size: 50px;
+            position: auto;
+            margin-left: 50px;
+            margin-right: 50px;
+
+        }
+
+        button {
+            padding: 10px;
+            background-color: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: auto;
+            margin-left: 185px;
+            margin-top: 20px;
+        }
+
+        #preview {
+            max-width: 500px;
+            display: none;
+            margin-top: 100px;
+            background-color: silver;
+            margin-left: 500px;
+        }
+
+        a {
+            padding: 10px;
+            background-color: #002aff;
+            color: white;
+            border: none;
+            text-decoration: none;
+            margin-left: auto 350px;
+        }
+
+        form h2{
+            margin-left: 100px;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="stlForm.html">STL Laguna Bet Form</a>
+    <a href="drawResult.html">Draw Result</a>
+
+   <div class="centered">
+    <form id="form" >
+
+        <h2>STL Laguna Betting Form</h2>
+        <label for="bettingDate">Betting Date:</label>
+        <input type="date" id="bettingDate" required>
+
+        <label for="drawTime">Draw Time:</label>
+        <select id="drawTime" name="drawTime" required>
+            <option value="10:00 AM">10:00 AM</option>
+            <option value="3:00 PM">3:00 PM</option>
+            <option value="8:00 PM">8:00 PM</option>
+        </select>
+
+        <label for="firstNumber">First Number:</label>
+        <select id="firstNumber" name="firstNumber">
+            <!-- Generate options dynamically using JavaScript if needed -->
+        </select>
+
+        <label for="secondNumber">Second Number:</label>
+        <select id="secondNumber" name="secondNumber">
+            <!-- Generate options dynamically using JavaScript if needed -->
+        </select>
+
+        <label for="tumbok">Tumbok Amount:</label>
+        <input type="number" id="tumbok" max="1000" name="tumbok" required>
+
+        <label for="sahod">Sahod Amount:</label>
+        <input type="number" id="sahod" max="1000" name="tumbok" required>
+
+        <label for="agent">Agent Name:</label>
+        <select id="agent" name="agent">
+            <option value="Domeng">Lee</option>
+            <option value="Chard">Chard</option>
+            <option value="Domeng">Roger</option>
+            <option value="Chard">Tams</option>
+            <option value="Domeng">Charice</option>
+            <option value="Chard">Romy</option>
+            <option value="Domeng">Mercy</option>
+            <option value="Chard">Manilyn</option>
+            <option value="Domeng">Sheng</option>
+            <option value="Chard">Rico</option>
+            <!-- Add other agent options -->
+        
+        </select>
+        
+
+        <button type="button" onclick="previewDetails()">Next Page</button>
+       </form>
+       </div>
+ <form method="post" action="https://script.google.com/macros/s/AKfycbyjGz01Cem2ULpFEt4-or4logfms7GvNoO_o3vy6Jv-eKG5oPxTYFdbZQ0n-sThS94_/exec">
+    <div id="preview">
+       
+        <h2>Bet Details:</h2>
+        <p>
+            <strong>Betting Date:</strong> <span id="previewBettingDate"></span>
+            <input type="hidden" id="txtBettingDate" name="bettingDate"/>
+        </p>
+        <p>
+            <strong>Draw Time:</strong> <span id="previewDrawTime"></span>
+            <input type="hidden" id="txtDrawTime" name="drawTime"/>
+        </p>
+        <p>
+            <strong>Number Combination:</strong> <span id="previewNumbers"></span>
+            <input type="hidden" id="txtPreviewNumbers" name="previewNumbers"/> 
+            <input type="hidden" id="txtFirstNumber" name="firstNumber"/>
+            <input type="hidden" id="txtSecondNumber" name="secondNumber"/>
+        </p>
+        <p>
+            <strong>Tumbok Amount:</strong> <span id="previewTumbokAmount"></span>
+            <input type="hidden" id="txtTumbok" name="tumbok"/> 
+        </p>
+        <p>
+            <strong>Sahod Amount:</strong> <span id="previewSahodAmount"></span>
+            <input type="hidden" id="txtSahod" name="sahod"/> 
+        </p>
+        <p>
+            <strong>Agent Name:</strong> <span id="previewAgent"></span>
+            <input type="hidden" id="txtAgent" name="agent"/> 
+            <input type="hidden" id="txtReferenceNumber" name="referenceNumber"/>
+        </p>
+        <p><strong>Tumbok Possible Winning:</strong> <span id="previewtumbok"></span></p>
+        <p><strong>Sahod Possible Winning::</strong> <span id="previewsahod"></span></p>
+        <p><strong>Pompyang Possible Winning::</strong> <span id="previewPompyang"></span></p>
+
+        <button onclick="editDetails()">Edit</button>
+        <!-- <button onclick="submitForm()">Submit</button> -->
+        <button type="submit">Submit</button>
+    </div>
+      </form>
+
+
+
+    <script>
+        // Function to generate number options dynamically
+        function generateNumberOptions() {
+            const select = document.getElementById('firstNumber');
+            for (let i = 1; i <= 38; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = i;
+                select.appendChild(option);
+            }
+
+            const secondSelect = document.getElementById('secondNumber');
+            for (let i = 1; i <= 38; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = i;
+                secondSelect.appendChild(option);
+            }
+        }
+
+        generateNumberOptions();
+
+        function previewDetails() {
+            // Get form values
+            const bettingDate = document.getElementById('bettingDate').value;
+            const drawTime = document.getElementById('drawTime').value;
+            const firstNumber = document.getElementById('firstNumber').value;
+            const secondNumber = document.getElementById('secondNumber').value;
+            const tumbok = document.getElementById('tumbok').value;
+            const sahod = document.getElementById('sahod').value;
+            const agent = document.getElementById('agent').value;
+
+            // Display values in the preview
+            document.getElementById('previewBettingDate').textContent = bettingDate;
+            document.getElementById('previewDrawTime').textContent = drawTime;
+            document.getElementById('previewNumbers').textContent = `${firstNumber} / ${secondNumber}`;
+            document.getElementById('previewTumbokAmount').textContent = tumbok;
+            document.getElementById('previewSahodAmount').textContent = sahod;
+            document.getElementById('previewAgent').textContent = agent;
+            document.getElementById('previewtumbok').textContent = (tumbok) * 700;
+            document.getElementById('previewsahod').textContent = (sahod) * 700;
+            document.getElementById('previewPompyang').textContent = (parseInt(tumbok) + parseInt(sahod)) * (700 / 2);
+
+            //Set value to next form
+            txtBettingDate.value = bettingDate;
+            txtDrawTime.value = drawTime;
+            txtPreviewNumbers.value = `${firstNumber} / ${secondNumber}`;
+            txtFirstNumber.value = firstNumber;
+            txtSecondNumber.value = secondNumber;
+            txtTumbok.value = tumbok;
+            txtSahod.value = sahod;
+            txtAgent.value = agent;
+            txtReferenceNumber.value = generateReferenceNumber();
+
+            // Hide form, show preview
+            //document.getElementById('lotteryForm').style.display = 'none';
+            document.getElementById('form').style.display = 'none';
+            document.getElementById('preview').style.display = 'block';
+        }
+
+        function editDetails() {
+            // Show form, hide preview
+            document.getElementById('lotteryForm').style.display = 'block';
+            document.getElementById('preview').style.display = 'none';
+        }
+
+        function submitForm() {
+            // Simulate submitting the form and logging to Google Sheets
+            // For actual implementation, you'll need server-side code to handle this part
+            // const referenceNumber = generateReferenceNumber();
+             const lblReferenceNumber = txtReferenceNumber.value;
+             console.log('Form submitted. Reference Number:', lblReferenceNumber);
+             alert('Form submitted successfully. Reference Number: ' + lblReferenceNumber);
+        }
+
+        function generateReferenceNumber() {
+            const currentDate = new Date();
+            const randomDigits = Math.floor(100000 + Math.random() * 900000); // 6-digit random number
+            const referenceNumber = currentDate.getFullYear() + '' +
+                                  (currentDate.getMonth() + 1).toString().padStart(2, '0') +
+                                  currentDate.getDate().toString().padStart(2, '0') +
+                                  randomDigits +
+                                  '1'; // Adding 1 at the end
+            return referenceNumber;
+        }
+    </script>
+</body>
+</html>
